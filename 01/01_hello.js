@@ -1,4 +1,16 @@
 function fn(){
-    console.log("你好")
+    console.log("fn----", this)
 }
-console.log(fn)
+
+const fn2 = () => {
+    console.log("fn2----", this)
+}
+
+const obj = {
+    name: "孙悟空",
+    fn: fn,
+    fn2: fn2,
+}
+
+obj.fn()
+obj.fn2()

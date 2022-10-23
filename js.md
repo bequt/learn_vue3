@@ -187,7 +187,7 @@ console.log(typeof e, e)
 - {}使用代码块对代码分组，要么一起执行，要么就一起不执行
 - let和var
   - let，具有块作用域，无法在外部访问
-  - var，不具有块作用域，可以在任意地方访问
+  - var，不具有块作用域，可以在任意地方访问，变量会提升到最前面
 
 ```javascript
 // 代码块
@@ -249,14 +249,22 @@ for (let propName in obj){
   - 函数声明，function 函数名(){}
   - 函数表达式，const
   - 箭头函数，=>
+- 定义参数时，可以为参数指定默认值，(a=10, b=20, c=30)
+- 函数作为参数传给函数，用于动态传递代码，函数式编程
+- return
+  - 可以返回对象和函数
+  - 返回值为空或者不写return，那么相当于返回undefined
+  - 箭头函数的返回值，如果返回值是对象，那么需要( {name: "孙悟空"} )
+- 对象中属性为函数，那就称为对象的方法
+- 函数会自动提升到最前面，防止调用失败
 
 ```javascript
-function fn1(){
+function fn1() {
   console.log("hello")
 }
 
 // 函数表达是
-const fn2 = function(){
+const fn2 = function() {
 
 }
 
@@ -269,7 +277,102 @@ const fn3 = (a, b) => {
 const fn4 = a => console.log("箭头函数")
 ```
 
+## 作用域
 
+- 变量
+- 函数
+- 作用域链
 
+## Window对象
+
+- 在全局中使用var声明的变量，都会作为windows对象的属性保存
+- 使用function声明的函数，都会作为windows的方法保存
+
+## debugger
+## 立即执行函数
+
+- 创建一个一次性的函数作用域，避免变量冲突的问题
+
+```javascript
+// 希望可以创建一个只执行一次的匿名函数
+(function () {
+    let a = 10
+    console.log(a)
+}());
+
+(function () {
+    let a = 10
+    console.log(a)
+}());
+```
+
+## this
+
+- 函数在执行时，JS解析器每次都会传递进一个隐含的参数this
+- this会指向一个对象
+  - this所指向的对象会根据函数调用方式的不同而不同
+    1. 以函数形式调用时，this指向的是window
+    2. 以方法形式调用时，this指向的是调用方法的对象
+  - 通过this可以在方法中引用调用方法的对象
+- 箭头函数的this
+  - 箭头函数没有自己的this，它的this有外层作用域决定
+  - 箭头函数的this和它的调用方式无关
+
+```javascript
+function fn(obj){
+    console.log(this, this === obj)
+}
+
+const obj1 = {name: "孙悟空"}
+obj1.test = fn
+
+const obj2 = {name: "猪八戒", test: fn}
+
+obj1.test(obj1)
+obj2.test(obj2)
+
+// 应用
+const obj3 = {
+  name: "沙和尚",
+  sayHello: function () {
+    console.log(this.name)
+  },
+}
+
+const obj4 = {
+  name: "唐僧",
+  sayHello: function () {
+    console.log(this.name)
+  },
+}
+
+obj3.sayHello()
+obj4.sayHello()
+
+// 箭头函数的this
+function fn(){
+  console.log("fn----", this)
+}
+
+const fn2 = () => {
+  console.log("fn2----", this)
+}
+
+const obj = {
+  name: "孙悟空",
+  fn: fn,
+  fn2: fn2,
+}
+
+fn()  // window
+fn2() // window
+
+obj.fn()  // obj，主要看调用者是谁就打印谁
+obj.fn2() // window，箭头直接看外层是谁就打印谁，未来常用箭头函数
+```
+
+## 严格模式
+
+- 
 
 
