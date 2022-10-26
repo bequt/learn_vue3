@@ -346,6 +346,14 @@ const obj4 = {
   },
 }
 
+const obj5 = {
+  name: "猪八戒",
+  // 方法可以省略function
+  sayHello() {
+    console.log(this.name)
+  },
+}
+
 obj3.sayHello()
 obj4.sayHello()
 
@@ -373,6 +381,115 @@ obj.fn2() // window，箭头直接看外层是谁就打印谁，未来常用箭�
 
 ## 严格模式
 
-- 
+- use strict开启严格模式
+
+```javascript
+"use strict"
+let a = 10
+b = 10  // 错误
+```
+
+## 对象与类
+
+- 对象
+- 类，class
+  - 类是对象的模板，可以将对象中的属性和方法直接定义在类中
+
+```javascript
+"use strict"
+
+// 对象
+const man = {
+  name: "王老五",
+  age: 48,
+  
+  sleep() {
+    console.log(this.name, "睡觉了")
+  },
+
+  eat() {
+    console.log(this.name, "吃饭了")
+  },
+}
 
 
+// 类
+class Person {
+  name: "张三",
+  age: 18,
+  static test = "test静态属性"  // 静态属性只能通过类去访问，不在实例中，Person.test
+  sleep() {
+    console.log(this, "在睡觉")
+  }
+  static test() {
+    console.log(this, "静态方法") // Person.test()
+  }
+}
+
+const p1 = new Person()
+p1.name = "张三"
+p1.age = 12
+console.log(p1)
+console.log(p1 instanceof Person)
+```
+
+## 构造函数
+
+```javascript
+class Person {
+    // 构造函数方法
+    constructor(name, age, sex) {
+        console.log("构造函数执行了...")
+        // 在构造函数中，this表示当前所创建对象
+        this.name = name
+        this.age = age
+        this.sex = sex
+    }
+}
+
+const p1 = new Person("张三", 18, "男")
+console.log(p1)
+```
+
+## 封装、继承、多态
+
+- 封装
+  - 对象就是一个用来存储不同属性的容器
+  - 对象不仅存储属性，还要负责数据的安全
+  - 私有化数据
+  - 提供setter和getter方法来开放对数据的操作
+
+```javascript
+class Person {
+    #name // 实例使用#开头就变成私有属性
+    #age
+
+    constructor(name, age) {
+        this.#name = name // 赋值也要加#
+        this.#age = age
+    }
+
+    sayHello() {
+        console.log(this.#name)
+    }
+
+    setName(name) {
+        this.#name = name
+    }
+
+    getName() {
+        return this.#name
+    }
+
+}
+
+const p1 = new Person("张三", 18)
+p1.sayHello()
+p1.setName("李四")
+console.log(p1.getName())
+
+// 多态
+// 继承
+```
+
+## 原型
