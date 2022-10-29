@@ -513,7 +513,45 @@ console.log(p1.getName())
 - 原型对象也有原型
 - p对象的原型链：p对象-->原型-->原型-->null
 - obj对象的原型链：obj对象-->原型-->null
+- 原型就相当于是一个公共区域，可以被所有该类实例访问
+- JS中继承就是通过原型来实现的
+- instanceof
+- hasOwn
 
+```javascript
+// instanceof，用来检查一个对象是否是一个类的实例
+// 只要原型链上有该类实例，就会返回true
+// dog -> Animal的实例 -> Object实例 -> Object原型
+class Animal{}
+
+class Dog extends Animal{}
+
+const dog = new Dog()
+console.log(dog instanceof Animal)
+
+// hasOwnProperty，不推荐使用
+// in运算检查属性时，无论属性在对象自身还是原型中，都会返回true
+// hasOwnProperty，在Object原型里
+// hasOwn，推荐使用
+class Person{
+    name = "孙悟空"
+    age = 18
+
+    sayHello() {
+        console.log("1")
+    }
+}
+
+const p = new Person()
+
+console.log(p.hasOwnProperty("name")) // true
+console.log(p.hasOwnProperty("sayHello")) // false
+
+console.log(Object.hasOwn(p, "name"))
+console.log(Object.hasOwn(p, "sayHello"))
+```
+
+## 
 
 
 
