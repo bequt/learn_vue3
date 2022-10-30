@@ -1,17 +1,8 @@
-class Person{
-    name = "孙悟空"
-    age = 18
+const obj1 = {name: "孙悟空", age: 18}
+const obj2 = {address: "花果山", age: 28}
 
-    sayHello() {
-        console.log("1")
-    }
-}
+Object.assign(obj2, obj1)
+console.log(obj2)
 
-const p = new Person()
-
-console.log(p.hasOwnProperty("name")) // true
-console.log(p.hasOwnProperty("sayHello")) // false
-
-console.log(Object.hasOwn(p, "name"))
-console.log(Object.hasOwn(p, "sayHello"))
-
+const obj3 = {...obj1}
+console.log(obj3)

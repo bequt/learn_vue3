@@ -506,6 +506,9 @@ console.log(p1.getName())
       - 会添加到原型对象中的情况
         1. 在类中通过xxx(){}
         2. 主动向原型中添加的属性或方法
+- 内建对象，Object
+- 宿主对象，浏览器，BOM、DOM
+- 自定义对象
 
 ## 原型对象
 
@@ -551,9 +554,70 @@ console.log(Object.hasOwn(p, "name"))
 console.log(Object.hasOwn(p, "sayHello"))
 ```
 
-## 
+## 数组
 
+- 
 
+```javascript
+// 创建数组，尽量避免非连续数组
+const arr1 = new Array()
+const arr2 = [1, 2] // 数组自变量
+
+console.log(arr2.length)
+
+arr2[arr2.length] = 33   // 总是向数组最后添加元素
+
+// 遍历数组
+// for
+// for of
+const names = ["张三", "李四"]
+
+for(let i of names){
+  console.log(i)
+}
+
+// concat()，用来链接两个或多个数组
+// indexOf()，没有找到返回-1
+// lastIndexOf()，没有找到返回-1
+// join()，将数组元素连接为一个字符串
+// slice(1,4)，用来截取数组，不填数字就是复制
+// push()，往数组添加元素
+// pop()，删除并返回数组最后一个元素
+// unshift()，向数组的开头添加一个或多个元素，并返回新的长度
+// shift()，删除并返回数组的第一个元素
+// splice()，删除、添加、插入、替换数组中的元素
+// reverse()，反转数组
+// sort()
+
+// 复制一个对象
+const arr1 = [1]
+const arr2 = arr1.slice()
+
+```
+
+## 浅拷贝和深拷贝
+
+```javascript
+// 浅拷贝
+// 只会对对对象本身进行复制，不会复制对象中的属性（或元素）
+const arr1 = [{name: "孙悟空"}, {name: "猪八戒"}]
+const arr2 = arr.slice()  // 浅拷贝
+const arr4 = [...arr1]  // 浅拷贝，...展开运算符，传参数也可以 
+
+// 深拷贝
+// 不仅复制对象本身，还复制对象中的属性和元素
+const arr3 = structuredClone(arr1)
+
+// 对象复制
+const obj1 = {name: "孙悟空", age: 18}
+const obj2 = {address: "花果山", age: 28}
+
+Object.assign(obj2, obj1)
+console.log(obj2)
+
+const obj3 = {...obj1}
+console.log(obj3)
+```
 
 
 
