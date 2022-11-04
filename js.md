@@ -619,5 +619,93 @@ const obj3 = {...obj1}
 console.log(obj3)
 ```
 
+## 高阶函数
+
+```javascript
+// 如果一个喊叔叔的参数或返回值是函数，则这个函数就称为高阶函数
+// 回调函数
+// 一个函数的参数也可以是函数，这种函数叫回调函数（callback）
+personArr = [{name: "孙悟空", age: 18}, {name: "唐僧", age: 28}]
+
+function filter(arr, cb) {
+    const newArr = []
+    for (let value of arr) {
+        if (cb(value)) {
+            newArr.push(value)
+        }
+    }
+    return newArr
+}
+
+result1 = filter(personArr, a => a.name === "孙悟空")
+result2 = filter(personArr, a => a.age > 18)
+
+console.log(result1)
+console.log(result2)
 
 
+// 希望someFn()函数执行时，可以记录一条日志
+// 在不修改原函数的基础上，为其增加记录日志功能
+// 可以通过高阶函数来动态生成一个新函数
+function someFn() {
+    return "hello"
+}
+
+function outer(cb) {
+    return () => {
+        console.log("记录日志操作")
+        return cb()
+    }
+}
+
+let result = outer(someFn)
+console.log(result())
+```
+
+## 闭包
+
+```javascript
+// 创建一个函数，第一次调用时打印1，第二次调用打印2
+// 1. 函数嵌套
+// 2. 内部函数要引用外部函数中的变量
+// 3. 内部函数要作为返回值返回
+// 需要执行次数较少时，使用闭包，优先使用闭包
+// 需要执行次数较多时，使用类
+function outer() {
+    let num = 0
+
+    return () => {
+        num++
+        console.log(num)
+    }
+}
+
+const newFn = outer()
+newFn()
+newFn()
+newFn()
+```
+
+## 递归
+
+```javascript
+// 递归的本质是把大问题拆分成小问题，解决小的问题就可以解决大的问题
+function jieCheng(num) {
+    // 基线条件
+    if (num === 1) {
+        return 1
+    }
+
+    // 递归条件
+    return num * jieCheng(num - 1)
+}
+
+console.log(jieCheng(5))
+```
+
+## sort
+
+```javascript
+let arr = [1, 2, 44, 42,21 ,11]
+
+```
