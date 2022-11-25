@@ -703,9 +703,235 @@ function jieCheng(num) {
 console.log(jieCheng(5))
 ```
 
-## sort
+## 数组方法
 
 ```javascript
-let arr = [1, 2, 44, 42,21 ,11]
+let arr1 = [1, 2, 44, 42, 21, 11]
 
+arr1.sort((a, b) => b - a)
+console.log(arr1)
+
+console.log("forEach")
+// forEach，遍历数组
+// 需要一个回调函数作为参数，这个回调函数会被调用多次
+// element，当前元素
+// index，当前元素的索引
+// array，被遍历数组
+arr1.forEach((element, index, array) => {
+    console.log(index, element)
+})
+
+console.log("filter")
+// filter()，将数组中符合条件元素保存到一个新数组中返回
+// 非破坏性方法，不会影响原数组
+arr2 = [1, 2, 44, 42, 21, 11]
+arr2.filter((element) => {
+    if (element % 2 === 0) {
+        console.log(element)
+    }
+})
+
+let result1 = arr2.filter(element => element % 2 !== 0)
+console.log(result1)
+
+console.log("map")
+// map
+// 根据当前数组生成一个新数组
+// 非破坏性方法，不会影响原数组
+arr3 = [1, 2, 44, 42, 21, 11]
+result2 = arr3.map((element) => {
+    return element * 2
+})
+console.log(result2)
+
+// reduce
+// 可以将一个数组中的所有元素整合为一个值
+arr4 = [1, 2, 44, 42, 21, 11]
+result3 = arr4.reduce((element1, element2) => {
+    return element1 + element2
+})
+console.log(result3)
 ```
+
+## 可变参数
+
+```javascript
+// arguments
+// 是函数中有一个隐藏参数
+// 是一个类数组对象（伪数组），用来存储函数的实参，但是不能调用数组的方法
+function fn() {
+    console.log(arguments.length)
+    for (const argument of arguments) {
+        console.log(argument)
+    }
+}
+
+fn(1, 10, 33)
+
+// 可变参数，建议使用
+function fn2(a, b, ...args) {
+    console.log(args)
+}
+
+fn2(123, 456, 11, 23)
+```
+
+## call和apply
+
+```javascript
+// call，可以调用函数
+// apply，可以调用函数
+// 还可以用来指定函数中的this
+function fn1() {
+    console.log("函数被调用了", this)
+}
+
+const obj = {
+    name: "孙悟空",
+    fn: () => {
+    },
+}
+
+fn1.call()
+fn1.apply()
+
+fn1.call(obj)
+fn1.apply(obj)
+
+function fn2(a, b) {
+    console.log(a, b, this)
+}
+
+fn2.call(obj, 1, 2)
+fn2.apply(obj, [1, 2])
+```
+
+## bind
+
+```javascript
+// bind
+// 返回一个新的函数，相当于创建一个函数
+function fn1(...args) {
+    console.log("fn执行了", this)
+    console.log(args)
+}
+
+const obj = {
+    name: "孙悟空"
+}
+
+const newFn = fn1.bind(obj, 1, 2, 3)
+newFn()
+```
+
+## 内建对象
+
+```javascript
+// 解构赋值
+const arr = [1, 2, 3]
+
+let [a, b, c] = arr
+let [n1, ...n3] = arr
+
+console.log(a, b, c)
+console.log(n1, n3)
+
+let [a1, a2] = [12, 13]
+;[a2, a1] = [a1, a2]
+console.log(a1, a2)
+
+// 对象解析
+const obj = {
+    name: "孙悟空",
+    age: 18,
+    sex: "男",
+}
+
+let {name, age, sex} = obj
+let {name: a, age: b, sex: c} = obj
+
+console.log(name, age, sex)
+console.log(a, b, c)
+```
+
+## 对象序列化
+
+```javascript
+// JSON有助于在不同语言中传递
+const obj = {
+    name: "孙悟空",
+    age: 18,
+    sex: "男",
+}
+console.log(obj)
+
+// 将obj转换为JSON字符串
+const str = JSON.stringify(obj)
+const obj2 = JSON.parse(str)
+console.log(str)
+console.log(obj2)
+
+const str2 = '{"name": "猪八戒", "age": 28}'
+console.log(str2)
+``` 
+
+## JSON复制
+
+```javascript
+// JSON复制
+const obj = {
+    name: "孙悟空",
+    age: 18,
+    sex: "男",
+    friend: {
+        name: "猪八戒",
+    },
+}
+
+// obj，浅复制
+const obj2 = Object.assign({}, obj)
+
+// 利用JSON来完成深复制
+const str = JSON.stringify(obj)
+const obj4 = JSON.parse(str)
+console.log(obj4)
+```
+
+## map
+
+```javascript
+// Map对象
+// Map对象相较于Obj对象，Map可以设置键为Obj对象
+const obj = {
+    name: "孙悟空",
+}
+const map = new Map()
+map.set("age", 18)
+map.set(obj, "aa")
+
+console.log(map)
+console.log(map.get(obj))
+
+map.delete("age")
+console.log(map)
+map.clear()
+
+// map和数组的转换
+const map = new Map()
+map.set("name", "孙悟空")
+map.set("age", 18)
+
+const arr = Array.from(map)
+console.log(arr)
+
+// map遍历
+for (const ele of map) {
+    console.log(ele[0], ele[1])
+}
+
+console.log(map.keys())
+console.log(map.values())
+```
+
+## set
+
