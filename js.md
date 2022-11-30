@@ -935,3 +935,65 @@ console.log(map.values())
 
 ## set
 
+```javascript
+// set集合
+// 不能存储重复的数据
+
+const set = new Set()
+
+set.add("name", "孙悟空")
+set.add("age", 18)
+
+console.log(set)
+```
+
+## math
+## data
+
+## 包装类
+
+```javascript
+/*
+包装类
+    - String
+    - Number
+    - Boolean
+    - BigInt
+    - Symbol
+可以直接调用包装类的函数
+ */
+```
+
+## 正则
+## 垃圾回收
+## DOM
+
+- document，很多属性和方法
+- 获取元素节点
+  - document.getElementById()，id属性
+  - document.getElementsByClassName()，类名
+  - document.getElementsByTagName()，标签名
+  - document.getElementsByName()，name属性
+  - document.querySelectorAll()，根据选择器去页面中查找元素，不会实时更新
+  - document.querySelector()，根据选择器去页面中查找第一个元素，不会实时更新
+- 元素中的文本节点
+  - element.textContent，获取或修改元素中的文本内容，不考虑css样式
+  - element.innerText，获取或修改元素中的文本内容，考虑css样式
+  - element.innerHTML，获取或修改元素中的html代码，有风险
+- 元素中的属性节点（Attr）
+  - 元素.属性名（class属性需要用className来读取）
+  - 元素.getAttribute(属性名)
+  - 元素.setAttribute(属性名, 属性值)
+  - 元素.removeAttribute(属性名, 属性值)
+- 事件
+  - btn.onclick = function(){}，一个事件只能绑定一个响应函数
+  - btn.addEventListener("click", function(){})，可以执行两个相同的事件
+
+## 文档加载
+
+- 网页上是自上而下加载的，如果将js代码编写到网页的上边，可能会出现无法获取到DOM对象的情况
+  1. 将script标签代码写到body标签的最后
+  2. 将代码编写到window.onload的回调函数中，window.onload = function(){ // js代码 }
+  3. 将代码编写到document对象的DOMContentLoaded的回调函数中，window.addEventLIstener("load", function(){ // js代码 })
+  4. 将代码编写到外部的js文件中，然后以defer的形式进行引入，<srcipt defer src=""></srcipt>
+- 
